@@ -78,7 +78,7 @@ public class UpnpDevices extends CordovaPlugin {
             		String type = rootDevices.getDevice(i).getDeviceType();
             		String udn = rootDevices.getDevice(i).getUDN();
             		String modelName = rootDevices.getDevice(i).getModelName();
-            		String xml = rootDevices.getDevice(i).getDeviceNode().toString();
+            		String xml = rootDevices.getDevice(i).getDeviceNode().toString().replace("\n", "");
             		jo.put("_index", i);
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
@@ -86,7 +86,7 @@ public class UpnpDevices extends CordovaPlugin {
             		jo.put("online", true);
             		jo.put("onserviceoffline", false);
             		jo.put("onserviceonline", false);
-            		jo.put("config", xml.toString().replace("\n", ""));
+            		jo.put("config", xml);
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
 					Matcher url = pattern.matcher(rootDevices.getDevice(i).getLocation());
 					url.find();
@@ -99,7 +99,6 @@ public class UpnpDevices extends CordovaPlugin {
 					}
 					ServiceList sList = rootDevices.getDevice(i).getServiceList();
 					int sLength = sList.size();
-					System.out.println(jo);
 					if (sLength > 0) {
 						for(int n=0; n < sLength; n++) {
 							Service service = sList.getService(n);
