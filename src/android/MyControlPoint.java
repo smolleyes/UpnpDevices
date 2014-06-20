@@ -1,3 +1,5 @@
+package fr.ubukey;
+
 import org.cybergarage.upnp.ControlPoint;
 import org.cybergarage.upnp.device.NotifyListener;
 import org.cybergarage.upnp.device.SearchResponseListener;

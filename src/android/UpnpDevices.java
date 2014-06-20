@@ -56,7 +56,7 @@ public class UpnpDevices extends CordovaPlugin {
 	}
 	
     public void searchDevices() {
-		Log.d("UpnpDevices", "started " + type);
+		Log.d("UpnpDevices", "Search started...");
         UPnP.setEnable(UPnP.USE_ONLY_IPV4_ADDR);
         MyControlPoint controlPoint = new MyControlPoint();
         controlPoint.start();
