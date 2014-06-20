@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        id="fr.ubukey.UpnpDevices"
+        version="1.0.2">
+    <engines>
+        <engine name="cordova" version=">=3.0.0" />
+    </engines>
+  
+    <name>UpnpDevices</name>
+    <description>Upnp devices browser for cordova</description>
+    <author>Laguillaumie Sylvain</author>
+    <keywords>upnp</keywords>
+    <license>MIT</license>
+  
+    <js-module src="www/UpnpDevices.js" name="upnpdevices">
+        <clobbers target="UpnpDevices" />
+    </js-module>
+
+    <platform name="android">
+      
+        <config-file target="AndroidManifest.xml" parent="/manifest">
+            <uses-permission android:name="android.permission.CHANGE_WIFI_MULTICAST_STATE"/>
+        </config-file>
+      
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="UpnpDevices">
+                <param name="android-package" value="fr.ubukey.UpnpDevices" />
+                <param name="onload" value="true" />
+            </feature>
+        </config-file>
+
+        <source-file src="src/android/libs/kxml2-2.3.0.jar" target-dir="libs" framework="true" />
+        <source-file src="src/android/libs/upnp.jar" target-dir="libs" framework="true" />
+        
+        <source-file src="src/android/UpnpDevices.java" target-dir="src/fr/ubukey" />
+        <source-file src="src/android/MyControlPoint.java" target-dir="src/fr/ubukey" />
+
+    </platform>
+    <info></info>
+</plugin>
