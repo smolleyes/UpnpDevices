@@ -45,7 +45,7 @@ public class UpnpDevices extends CordovaPlugin {
 		if (action.equals("start")) {
 			cordova.getThreadPool().execute(new Runnable() {
 					public void run() {
-						main(); // Thread-safe.
+						searchDevices(); // Thread-safe.
 					}
 				});
 		}
@@ -55,7 +55,8 @@ public class UpnpDevices extends CordovaPlugin {
 		return true;
 	}
 	
-    public Main() {
+    public void searchDevices() {
+		Log.d("UpnpDevices", "started " + type);
         UPnP.setEnable(UPnP.USE_ONLY_IPV4_ADDR);
         MyControlPoint controlPoint = new MyControlPoint();
         controlPoint.start();
@@ -141,11 +142,6 @@ public class UpnpDevices extends CordovaPlugin {
             jo.put("list","No UPNP root devices found");
             sendCallback("result", jo);
         }
-    }
-
-	private void main(String[] args) {
-        new Main();
-        Log.d("UpnpDevices", "started " + type);
     }
     
     public void sendCallback(String action, JSONObject json) {
