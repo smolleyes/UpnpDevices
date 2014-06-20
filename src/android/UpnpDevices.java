@@ -86,7 +86,7 @@ public class UpnpDevices extends CordovaPlugin {
             		jo.put("online", true);
             		jo.put("onserviceoffline", false);
             		jo.put("onserviceonline", false);
-            		jo.put("config", xml);
+            		jo.put("config", xml.toString().replace("\n", ""));
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
 					Matcher url = pattern.matcher(rootDevices.getDevice(i).getLocation());
 					url.find();
@@ -122,7 +122,6 @@ public class UpnpDevices extends CordovaPlugin {
 			            		devices.put("_connectionManagers",connectionManagers);
 			            		devices.put("_renderers",renderers);
 			            		devices.put("_avTransports",avTransports);
-			            		Log.v("UpnpDevices", "results "+devices);
 			            		sendCallback("result", devices);
 			            	}
 						}
@@ -134,7 +133,6 @@ public class UpnpDevices extends CordovaPlugin {
             }  
         } else {
 			try {
-				System.out.println("no root devices found");
 				JSONObject jo = new JSONObject();
 				jo.put("list","No UPNP root devices found");
 				sendCallback("result", jo);
