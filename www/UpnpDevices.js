@@ -16,7 +16,7 @@
 var exec = require('cordova/exec');
 
 var UpnpDevices = {
-	start: function ('',callback) {
+	start: function (type,callback) {
 		return exec(function (result) {
 			if (callback) {
 				callback(result);
