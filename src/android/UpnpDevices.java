@@ -96,7 +96,7 @@ public class UpnpDevices extends CordovaPlugin {
 					} catch (ArrayIndexOutOfBoundsException e) { 
 						jo.put("icon","[]");
 					}
-					//jo.put("config", xml);
+					jo.put("config", xml);
 					ServiceList sList = rootDevices.getDevice(i).getServiceList();
 					int sLength = sList.size();
 					System.out.println(jo);
