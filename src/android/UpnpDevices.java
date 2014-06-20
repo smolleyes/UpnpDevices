@@ -22,7 +22,6 @@ import org.json.JSONObject;
 
 public class UpnpDevices extends CordovaPlugin {
 	WifiManager.MulticastLock lock;
-	private ServiceListener listener;
 	private CallbackContext callback;
 	
 	@Override
