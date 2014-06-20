@@ -22,7 +22,10 @@ var UpnpDevices = {
 				callback(result);
 			}
 
-		});
+		},UpnpDevices.fail, "UpnpDevices", "start", '');
+	},
+	fail: function (o) {
+		console.error("Error " + JSON.stringify(o));
 	}
 };
 
