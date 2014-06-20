@@ -14,11 +14,11 @@ public class MyControlPoint extends ControlPoint implements /*DeviceChangeListen
 
     @Override
     public void deviceNotifyReceived(SSDPPacket packet) { // NotifyListener
-        Log.v("deviceNotifyReceived");
+        Log.v("UpnpDevices","deviceNotifyReceived");
     }
 
     @Override
     public void deviceSearchResponseReceived(SSDPPacket packet) { // SearchResponseListener
-        Log.v("deviceSearchReceived");
+        Log.v("UpnpDevices","deviceSearchReceived");
     }
 }

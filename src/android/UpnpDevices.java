@@ -122,7 +122,7 @@ public class UpnpDevices extends CordovaPlugin {
 			            		devices.put("_connectionManagers",connectionManagers);
 			            		devices.put("_renderers",renderers);
 			            		devices.put("_avTransports",avTransports);
-			            		Log.v("devices: "+devices);
+			            		Log.v("UpnpDevices", "results "+devices);
 			            		System.exit(0);
 			            	}
 						}
