@@ -38,7 +38,7 @@ public class UpnpDevices extends CordovaPlugin {
 	}
 	
 	@Override
-	public boolean execute(String action, JSONArray args,
+	public boolean execute(String action,
 			CallbackContext callbackContext) {
 		this.callback = callbackContext;
 		if (action.equals("start")) {
