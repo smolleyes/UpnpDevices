@@ -86,6 +86,7 @@ public class UpnpDevices extends CordovaPlugin {
             		jo.put("online", true);
             		jo.put("onserviceoffline", false);
             		jo.put("onserviceonline", false);
+            		jo.put("config", xml);
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
 					Matcher url = pattern.matcher(rootDevices.getDevice(i).getLocation());
 					url.find();
@@ -96,7 +97,6 @@ public class UpnpDevices extends CordovaPlugin {
 					} catch (ArrayIndexOutOfBoundsException e) { 
 						jo.put("icon","[]");
 					}
-					jo.put("config", xml);
 					ServiceList sList = rootDevices.getDevice(i).getServiceList();
 					int sLength = sList.size();
 					System.out.println(jo);
