@@ -136,10 +136,14 @@ public class UpnpDevices extends CordovaPlugin {
             	}
             }  
         } else {
-            System.out.println("no root devices found");
-            JSONObject jo = new JSONObject();
-            jo.put("list","No UPNP root devices found");
-            sendCallback("result", jo);
+			try {
+				System.out.println("no root devices found");
+				JSONObject jo = new JSONObject();
+				jo.put("list","No UPNP root devices found");
+				sendCallback("result", jo);
+			} catch(JSONException e) {
+				e.printStackTrace();
+			}
         }
     }
     
