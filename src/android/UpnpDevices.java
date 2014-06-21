@@ -153,20 +153,6 @@ public class UpnpDevices extends CordovaPlugin {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}
-							if(i+1 == numDevices){
-			            		controlPoint.stop();
-			            		devices.put("_servers",servers);
-			            		devices.put("_connectionManagers",connectionManagers);
-			            		devices.put("_renderers",renderers);
-			            		devices.put("_avTransports",avTransports);
-			            		sendCallback("result", devices);
-			            	}
-						}
-					}
-				} catch (JSONException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
-				}
             }  
         } else {
 			try {
