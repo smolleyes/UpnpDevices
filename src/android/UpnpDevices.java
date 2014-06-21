@@ -19,6 +19,7 @@ import org.cybergarage.upnp.UPnP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+import org.apache.commons.io.IOUtils;
 
 public class UpnpDevices extends CordovaPlugin {
 	WifiManager.MulticastLock lock;
@@ -78,15 +79,23 @@ public class UpnpDevices extends CordovaPlugin {
             		String type = rootDevices.getDevice(i).getDeviceType();
             		String udn = rootDevices.getDevice(i).getUDN();
             		String modelName = rootDevices.getDevice(i).getModelName();
-            		String xml = rootDevices.getDevice(i).getRootNode().toString();
+            		String uri = rootDevices.getDevice(i).getLocation();
+
+            		URL url = new URL(uri);
+            		URLConnection con = url.openConnection();
+            		InputStream in = con.getInputStream();
+            		String encoding = con.getContentEncoding();
+            		encoding = encoding == null ? "UTF-8" : encoding;
+            		String guid = IOUtils.toString(in, encoding);
+            		
             		jo.put("_index", i);
+            		jo.put("config", ""+guid+"");
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
             		jo.put("type", type);
             		jo.put("online", true);
             		jo.put("onserviceoffline", false);
             		jo.put("onserviceonline", false);
-            		jo.put("config", xml);
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
 					Matcher url = pattern.matcher(rootDevices.getDevice(i).getLocation());
 					url.find();
