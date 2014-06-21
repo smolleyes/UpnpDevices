@@ -85,8 +85,8 @@ public class UpnpDevices extends CordovaPlugin {
             		jo.put("udn", udn);
             		jo.put("type", type);
             		jo.put("online", true);
-            		jo.put("onserviceoffline", false);
-            		jo.put("onserviceonline", false);
+            		jo.put("onserviceoffline", null);
+            		jo.put("onserviceonline", null);
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
 					Matcher url1 = pattern.matcher(rootDevices.getDevice(i).getLocation());
 					url1.find();
