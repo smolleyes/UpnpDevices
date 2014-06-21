@@ -10,8 +10,15 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
+import org.apache.commons.io.IOUtils;
 import org.cybergarage.upnp.DeviceList;
 import org.cybergarage.upnp.Service;
 import org.cybergarage.upnp.ServiceList;
@@ -19,7 +26,6 @@ import org.cybergarage.upnp.UPnP;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-import org.apache.commons.io.IOUtils;
 
 public class UpnpDevices extends CordovaPlugin {
 	WifiManager.MulticastLock lock;
