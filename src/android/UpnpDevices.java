@@ -93,7 +93,6 @@ public class UpnpDevices extends CordovaPlugin {
             		String encoding = con.getContentEncoding();
             		encoding = encoding == null ? "UTF-8" : encoding;
             		String guid = IOUtils.toString(in, encoding);
-            		System.out.println(guid);
             		
             		jo.put("_index", i);
             		jo.put("config",""+guid+"");
@@ -138,8 +137,7 @@ public class UpnpDevices extends CordovaPlugin {
 			            		devices.put("_connectionManagers",connectionManagers);
 			            		devices.put("_renderers",renderers);
 			            		devices.put("_avTransports",avTransports);
-			            		String output = devices.toString();
-			            		System.out.println("devices: "+output);
+			            		sendCallback("result", devices);
 			            	}
 						}
 					}
