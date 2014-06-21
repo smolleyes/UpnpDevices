@@ -79,10 +79,8 @@ public class UpnpDevices extends CordovaPlugin {
             		String type = rootDevices.getDevice(i).getDeviceType();
             		String udn = rootDevices.getDevice(i).getUDN();
             		String modelName = rootDevices.getDevice(i).getModelName();
-            		String uri = rootDevices.getDevice(i).getLocation();
 
             		jo.put("_index", i);
-            		jo.put("config",uri);
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
             		jo.put("type", type);
