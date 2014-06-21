@@ -12,7 +12,6 @@ import org.apache.cordova.PluginResult.Status;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import org.cybergarage.upnp.DeviceList;
 import org.cybergarage.upnp.Service;
 import org.cybergarage.upnp.ServiceList;
@@ -79,34 +78,34 @@ public class UpnpDevices extends CordovaPlugin {
             		String type = rootDevices.getDevice(i).getDeviceType();
             		String udn = rootDevices.getDevice(i).getUDN();
             		String modelName = rootDevices.getDevice(i).getModelName();
-
+            		String xml = rootDevices.getDevice(i).getDeviceNode().toString().replace("\n", "");
             		jo.put("_index", i);
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
             		jo.put("type", type);
             		jo.put("online", true);
-            		jo.put("onserviceoffline", null);
-            		jo.put("onserviceonline", null);
+            		jo.put("onserviceoffline", false);
+            		jo.put("onserviceonline", false);
+            		jo.put("config", xml);
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
-					Matcher url1 = pattern.matcher(rootDevices.getDevice(i).getLocation());
-					url1.find();
-					jo.put("baseUrl", url1.group());
+					Matcher url = pattern.matcher(rootDevices.getDevice(i).getLocation());
+					url.find();
+					jo.put("baseUrl", url.group());
 					jo.put("friendlyName", rootDevices.getDevice(i).getFriendlyName());
 					try {
-						jo.put("icon",url1.group()+rootDevices.getDevice(i).getIcon(0).getURL());
+						jo.put("icon",url.group()+rootDevices.getDevice(i).getIcon(0).getURL());
 					} catch (ArrayIndexOutOfBoundsException e) { 
 						jo.put("icon","[]");
 					}
 					ServiceList sList = rootDevices.getDevice(i).getServiceList();
 					int sLength = sList.size();
-					System.out.println(jo);
 					if (sLength > 0) {
 						for(int n=0; n < sLength; n++) {
 							Service service = sList.getService(n);
 							String name = service.getServiceID();
 							jo.put("name", name);
 							jo.put("id",udn+":"+type+name);
-							jo.put("url",url1.group()+service.getControlURL());
+							jo.put("url",url.group()+service.getControlURL());
 							if (name.indexOf("RenderingControl") > 0){
 								renderers.put(jo);
 							} else if (name.indexOf("AVTransport") > 0){
@@ -127,7 +126,7 @@ public class UpnpDevices extends CordovaPlugin {
 						}
 					}
 				} catch (JSONException e) {
-					 //TODO Auto-generated catch block
+					// TODO Auto-generated catch block
 					e.printStackTrace();
 				}
             }  
