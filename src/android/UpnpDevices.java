@@ -10,15 +10,9 @@ import org.apache.cordova.CordovaWebView;
 import org.apache.cordova.PluginResult;
 import org.apache.cordova.PluginResult.Status;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLConnection;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.apache.commons.io.IOUtils;
 import org.cybergarage.upnp.DeviceList;
 import org.cybergarage.upnp.Service;
 import org.cybergarage.upnp.ServiceList;
@@ -87,15 +81,8 @@ public class UpnpDevices extends CordovaPlugin {
             		String modelName = rootDevices.getDevice(i).getModelName();
             		String uri = rootDevices.getDevice(i).getLocation();
 
-            		URL url = new URL(uri);
-            		URLConnection con = url.openConnection();
-            		InputStream in = con.getInputStream();
-            		String encoding = con.getContentEncoding();
-            		encoding = encoding == null ? "UTF-8" : encoding;
-            		String guid = IOUtils.toString(in, encoding);
-            		
             		jo.put("_index", i);
-            		jo.put("config",""+guid+"");
+            		jo.put("config",uri);
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
             		jo.put("type", type);
@@ -144,12 +131,6 @@ public class UpnpDevices extends CordovaPlugin {
 				} catch (JSONException e) {
 					 //TODO Auto-generated catch block
 					e.printStackTrace();
-				} catch (MalformedURLException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
 				}
             }  
         } else {

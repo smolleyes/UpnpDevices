@@ -32,7 +32,6 @@
 
         <source-file src="src/android/libs/kxml2-2.3.0.jar" target-dir="libs" framework="true" />
         <source-file src="src/android/libs/upnp.jar" target-dir="libs" framework="true" />
-        <source-file src="src/android/libs/commons-io-2.4.jar" target-dir="libs" framework="true" />
         
         <source-file src="src/android/UpnpDevices.java" target-dir="src/fr/ubukey" />
         <source-file src="src/android/MyControlPoint.java" target-dir="src/fr/ubukey" />
