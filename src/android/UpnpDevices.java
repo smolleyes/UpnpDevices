@@ -75,10 +75,8 @@ public class UpnpDevices extends CordovaPlugin {
             for (int i = 0; i < numDevices; i++) {
             	try {
             		JSONObject jo = new JSONObject();
-            		String type = rootDevices.getDevice(i).getDeviceType();
             		String udn = rootDevices.getDevice(i).getUDN();
             		String modelName = rootDevices.getDevice(i).getModelName();
-            		String xml = rootDevices.getDevice(i).getDeviceNode().toString().replace("\n", "");
             		jo.put("_index", i);
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
