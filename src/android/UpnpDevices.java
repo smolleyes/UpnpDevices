@@ -93,9 +93,10 @@ public class UpnpDevices extends CordovaPlugin {
             		String encoding = con.getContentEncoding();
             		encoding = encoding == null ? "UTF-8" : encoding;
             		String guid = IOUtils.toString(in, encoding);
+            		System.out.println(guid);
             		
             		jo.put("_index", i);
-            		jo.put("config", ""+guid+"");
+            		jo.put("config",""+guid+"");
             		jo.put("modelName", modelName);
             		jo.put("udn", udn);
             		jo.put("type", type);
@@ -103,24 +104,25 @@ public class UpnpDevices extends CordovaPlugin {
             		jo.put("onserviceoffline", false);
             		jo.put("onserviceonline", false);
 					Pattern pattern = Pattern.compile("http?:\\/\\/.+:[1-6][0-9]{0,4}");
-					Matcher url = pattern.matcher(rootDevices.getDevice(i).getLocation());
-					url.find();
-					jo.put("baseUrl", url.group());
+					Matcher url1 = pattern.matcher(rootDevices.getDevice(i).getLocation());
+					url1.find();
+					jo.put("baseUrl", url1.group());
 					jo.put("friendlyName", rootDevices.getDevice(i).getFriendlyName());
 					try {
-						jo.put("icon",url.group()+rootDevices.getDevice(i).getIcon(0).getURL());
+						jo.put("icon",url1.group()+rootDevices.getDevice(i).getIcon(0).getURL());
 					} catch (ArrayIndexOutOfBoundsException e) { 
 						jo.put("icon","[]");
 					}
 					ServiceList sList = rootDevices.getDevice(i).getServiceList();
 					int sLength = sList.size();
+					System.out.println(jo);
 					if (sLength > 0) {
 						for(int n=0; n < sLength; n++) {
 							Service service = sList.getService(n);
 							String name = service.getServiceID();
 							jo.put("name", name);
 							jo.put("id",udn+":"+type+name);
-							jo.put("url",url.group()+service.getControlURL());
+							jo.put("url",url1.group()+service.getControlURL());
 							if (name.indexOf("RenderingControl") > 0){
 								renderers.put(jo);
 							} else if (name.indexOf("AVTransport") > 0){
@@ -130,6 +132,27 @@ public class UpnpDevices extends CordovaPlugin {
 							} else if (name.indexOf("ConnectionManager") > 0){
 								connectionManagers.put(jo);
 							}
+							if(i+1 == numDevices){
+			            		controlPoint.stop();
+			            		devices.put("_servers",servers);
+			            		devices.put("_connectionManagers",connectionManagers);
+			            		devices.put("_renderers",renderers);
+			            		devices.put("_avTransports",avTransports);
+			            		String output = devices.toString();
+			            		System.out.println("devices: "+output);
+			            	}
+						}
+					}
+				} catch (JSONException e) {
+					 //TODO Auto-generated catch block
+					e.printStackTrace();
+				} catch (MalformedURLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				} catch (IOException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 							if(i+1 == numDevices){
 			            		controlPoint.stop();
 			            		devices.put("_servers",servers);
