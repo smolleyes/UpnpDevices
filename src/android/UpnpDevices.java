@@ -102,7 +102,7 @@ public class UpnpDevices extends CordovaPlugin {
 							String sType = service.getServiceType();
 							jo.put("type", sType);
 							jo.put("name", name);
-							jo.put("id",udn+":"+type+name);
+							jo.put("id",udn+":"+sType+name);
 							jo.put("url",url.group()+service.getControlURL());
 							if (name.indexOf("RenderingControl") > 0){
 								renderers.put(jo);
